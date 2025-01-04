@@ -1,94 +1,79 @@
-/* General body styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;             /* Use flexbox for centering */
-    justify-content: center;   /* Horizontally center the container */
-    align-items: center;       /* Vertically center the container */
-    height: 100vh;             /* Make sure body takes full height */
-  }
-  
-  /* Container for the invoice */
-  .container {
-    width: 80%;                /* Set the width of the container (you can adjust this value) */
-    max-width: 800px;          /* Maximum width of the container */
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  .logo img {
-    width: 60px; /* Adjust logo size */
-    height: auto;
-  }
-  
-  .logo {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    right: 50px;
-    z-index: 10; /* Makes sure the logo is above other content */
-  }
-  
-  
-  /* Heading styling */
-  h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  /* Styling for the unordered list */
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 20px;
-  }
-  
-  ul li {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 8px;
-  }
-  
-  strong {
-    color: #000;
-  }
-  
-  /* Table styling */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #f7f7f7;
-    font-weight: bold;
-  }
-  
-  /* Button styling */
-  button {
-    padding: 10px 20px;
-    background-color: #cc801d;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    display: block;
-    margin: 20px auto;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #b34200;
-  }
-  
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+ 
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: bold;
+}
+.logo img {
+  width: 60px; /* Adjust logo size */
+  height: auto;
+}
+ 
+.logo {
+  position: absolute;
+  top: 135px;
+  left: 200px;
+  right: 900px;
+  z-index: 10;
+}
+.table {
+  width: 100%; /* Keep the table width responsive */
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px; /* Reduce font size for smaller tables */
+}
+ 
+.table th,
+.table td {
+  padding: 8px; /* Reduce padding for smaller cell spacing */
+  text-align: left;
+  border: 1px solid #ddd;
+}
+ 
+.table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+ 
+.table td {
+  background-color: #fff;
+}
+ 
+ 
+p {
+  text-align: center;
+  color: #777;
+  font-size: 16px;
+}
+ 
+.ng-template {
+  margin-top: 20px;
+  text-align: center;
+  color: #666;
+}
+.btn:hover {
+  background-color: #b34200;
+}
+.btn {
+  padding: 12px 20px;
+  background-color: #cc801d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+ 
+ 

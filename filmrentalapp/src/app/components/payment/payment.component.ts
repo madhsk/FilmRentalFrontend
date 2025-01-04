@@ -7,14 +7,16 @@ import { Customer } from '../../model/Customer';
 import { FilmService } from '../../service/film.service';
 import { Film } from '../../model/film';
 import { CommonModule } from '@angular/common';
-
+import { NavbarComponent1 } from "../navbar/navbar.component";
+ 
 @Component({
   selector: 'app-payment',
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-  ],
+    NavbarComponent1
+],
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css'],
 })
@@ -24,7 +26,7 @@ export class PaymentComponent implements OnInit {
   customers: Customer[] = [];
   selectedCustomer: Customer | null = null;
   selectedFilm: Film | null = null;
-
+ 
   constructor(
     private fb: FormBuilder,
     private paymentService: PaymentService,
@@ -39,7 +41,7 @@ export class PaymentComponent implements OnInit {
       amount: [0, [Validators.required, Validators.min(1)]],
     });
   }
-
+ 
   ngOnInit(): void {
     // Fetch active customers
     this.customerService.getActiveCustomers().subscribe({
@@ -49,7 +51,7 @@ export class PaymentComponent implements OnInit {
       },
       error: (err) => console.error('Error fetching customers:', err),
     });
-
+ 
     // Get selected customer from the route params
     const customerName = this.activatedRoute.snapshot.params['customerId'];
     if (customerName) {
@@ -60,7 +62,7 @@ export class PaymentComponent implements OnInit {
               (customer.firstName + ' ' + customer.lastName).toLowerCase() ===
               customerName.toLowerCase()
           ) || null;
-
+ 
           if (this.selectedCustomer) {
             console.log('Selected Customer:', this.selectedCustomer);
             this.form.patchValue({
@@ -75,7 +77,7 @@ export class PaymentComponent implements OnInit {
         error: (err) => console.error('Error fetching customers:', err),
       });
     }
-
+ 
     // Get selected film from the route params
     const filmId = +this.activatedRoute.snapshot.params['filmId'];
     if (filmId) {
@@ -89,36 +91,36 @@ export class PaymentComponent implements OnInit {
       });
     }
   }
-
+ 
   // Handle customer selection and disable dropdown
   onCustomerSelect(event: Event): void {
     const selectedCustomerId = (event.target as HTMLSelectElement).value;
     this.selectedCustomer = this.customers.find(
       (customer) => customer.customerId === +selectedCustomerId
     ) || null;
-
+ 
     if (this.selectedCustomer) {
       this.form.get('customerId')?.disable();
     }
   }
-
+ 
   // Handle amount changes
   onAmountChange(event: Event): void {
     const amount = (event.target as HTMLInputElement).value;
     this.form.patchValue({ amount });
   }
-
+ 
   // Handle form submission
   onSubmit(): void {
     if (!this.form.valid) {
       alert('Please fill in all required fields and enter a valid amount.');
       return;
     }
-
+ 
     const { amount } = this.form.value;
     const name = `${this.selectedCustomer?.firstName} ${this.selectedCustomer?.lastName}`;
     const email = this.selectedCustomer?.email;
-
+ 
     this.paymentService.createOrder(amount).subscribe({
       next: (orderDetails) => {
         console.log('Order Details:', orderDetails);
@@ -140,7 +142,7 @@ export class PaymentComponent implements OnInit {
             color: '#cc081d',
           },
         };
-
+ 
         const rzp = new (window as any).Razorpay(options);
         rzp.open();
       },
@@ -149,14 +151,14 @@ export class PaymentComponent implements OnInit {
       },
     });
   }
-
+ 
   private handlePaymentSuccess(response: any): void {
     const paymentDetails = {
       razorpay_order_id: response.razorpay_order_id,
       razorpay_payment_id: response.razorpay_payment_id,
       razorpay_signature: response.razorpay_signature,
     };
-
+ 
     this.paymentService.verifyPayment(paymentDetails).subscribe({
       next: (result) => {
         this.paymentStatus = { success: true, message: result.message };
@@ -172,22 +174,28 @@ export class PaymentComponent implements OnInit {
       },
     });
   }
-
+ 
   // Navigate to the invoice page
   navigateToInvoice(): void {
     if (this.selectedCustomer && this.selectedFilm) {
       console.log('Passing Customer:', this.selectedCustomer);
       console.log('Passing Film:', this.selectedFilm);
-  
+      console.log('Passing Payment Amount:', this.form.value.amount);
       this.router.navigate(['/invoice'], {
         state: {
           customer: this.selectedCustomer,
           film: this.selectedFilm,
+          payment: {
+            amount: this.form.value.amount,
+            status: this.paymentStatus?.success ? 'Successful' : 'Failed',
+          },
         },
       });
     } else {
-      console.error('Customer or Film data is missing');
+      console.error('Customer, Film, Payment data is missing');
     }
   }
-  
+ 
 }
+ 
+ 

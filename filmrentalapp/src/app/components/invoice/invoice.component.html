@@ -1,38 +1,72 @@
-<body>
-  <div class="container">
-    <div class="logo">
-      <img src="../../../assets/logo.png" alt="MovieNest" />
-    </div>
-    <br />
-    <br />
-    <h2>Invoice</h2>
-    <ul>
-      <li><strong>Store Id :</strong>1</li>
-      <li><strong>Staff Id :</strong> 1</li>
-      <li><strong>Staff Name :</strong>Joe</li>
-      <li><strong>Customer Name:</strong> {{ customer?.name || 'N/A' }}</li>
-      <li><strong>Customer Email:</strong> {{ customer?.email || 'N/A' }}</li>
-      <li><strong>Transaction ID:</strong> #123456789</li>
-    </ul>
-    <table>
-      <thead>
-        <tr>
-          <th>S. No.</th>
-          <th>Film Title</th>
-          <th>Rental Duration</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>{{film?.title}}</td>
-          <td>{{film?.rental_duration}}</td>
-          
-        </tr>
-      
-      </tbody>
-    </table>
-    <button (click)="downloadInvoice()">Download Invoice</button>
+<app-navbar1></app-navbar1>
+  
+<div class="container mt-5">
+  
+  <div class="logo text-center">
+    <img src="../../../assets/logo.png" alt="MovieNest" />
   </div>
-</body>
+  <h2 class="text-center">Invoice</h2>
+ 
+  <div *ngIf="customer && film && payment; else noData">
+    <!-- Customer Details -->
+    <h4>Customer Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th>First Name</th>
+        <td>{{ customer.firstName }}</td>
+      </tr>
+      <tr>
+        <th>Last Name</th>
+        <td>{{ customer.lastName }}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{ customer.email }}</td>
+      </tr>
+    </table>
+ 
+    <hr />
+ 
+    <!-- Film Details -->
+    <h4>Film Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th>Title</th>
+        <td>{{ film.title }}</td>
+      </tr>
+      <tr>
+        <th>Release Year</th>
+        <td>{{ film.release_year }}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>{{ film.description }}</td>
+      </tr>
+    </table>
+ 
+    <hr />
+ 
+    <!-- Payment Details -->
+    <h4>Payment Details</h4>
+    <table class="table table-bordered">
+      <tr>
+        <th>Amount Paid</th>
+        <td>₹{{ payment.amount }}</td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td>{{ payment.status }}</td>
+      </tr>
+    </table>
+    <button class="btn" (click)="printInvoice()">Print Invoice</button>
+  </div>
+ 
+  <ng-template #noData>
+    <p class="text-center text-danger">
+      No invoice data available. Please complete the payment first.
+    </p>
+  </ng-template>
+</div>
+ 
+ 
+ 

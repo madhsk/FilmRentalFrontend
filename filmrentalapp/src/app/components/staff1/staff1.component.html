@@ -1,0 +1,54 @@
+<form (ngSubmit)="addStaff()" class="p-4 border rounded bg-light">
+    <h4 class="mb-4">Staff Details</h4>
+
+    <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" id="firstName" class="form-control" [(ngModel)]="newStaff.firstName" name="firstName" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" id="lastName" class="form-control" [(ngModel)]="newStaff.lastName" name="lastName" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" [(ngModel)]="newStaff.email" name="email" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="store" class="form-label">Store</label>
+        <select id="store" class="form-select" [(ngModel)]="newStaff.store" name="store" required>
+            <option value="" disabled selected>Select a store</option>
+            <option *ngFor="let store of stores" [ngValue]="store">{{ store.storeId }}</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <select id="address" class="form-select" [(ngModel)]="newStaff.address" name="address" required>
+            <option value="" disabled selected>Select an address</option>
+            <option *ngFor="let address of addresses" [ngValue]="address">{{ address.addressId }}</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" class="form-control" [(ngModel)]="newStaff.username" name="username" required />
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="newStaff.password" name="password" required />
+    </div>
+
+    <div class="mb-3 form-check">
+        <input type="checkbox" id="active" class="form-check-input" [(ngModel)]="newStaff.active" name="active" />
+        <label for="active" class="form-check-label">Active</label>
+    </div>
+    <!-- <div class="mb-3 form-check">
+        <label for="lastUpdate" class="form-label">Last Update</label>
+        <input type="datetime-local" name="lastUpdate" id="lastUpdate" [(ngModel)]="newStaff.lastUpdate">
+    </div> -->
+    <button type="submit" class="btn btn-primary">Add Staff</button>
+</form>

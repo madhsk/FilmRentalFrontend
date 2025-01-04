@@ -1,163 +1,155 @@
-
-body {
+/* General Reset for padding and margins */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 7px;
   box-sizing: border-box;
 }
 
-.navbar-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  position: relative;
-  top: 0;
-  z-index: 1000;
-  width:auto;
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4;
 }
 
-.logo-box img {
-  border-radius: 8px;
-  padding-top: 15%;
+/* Navbar Container */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  margin-top: 0px; /* To offset margin as per the original inline style */
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  height: 30px;
+
 }
 
 .logo-container {
   flex-grow: 1;
-  margin-left: 10px;
+  padding-left: 15px;
 }
 
 .logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #FFA500; /* Orange color for the logo */
-  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #a32104;
+  text-transform: uppercase;
 }
 
 .menu-container {
-  flex-grow: 2;
-  text-align: center;
+  display: flex;
 }
 
 .menu-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  list-style: none;
   display: flex;
-  justify-content: center;
-  gap: 15px;
 }
 
 .menu-list-item {
-  cursor: pointer;
-  font-size: 1rem;
-  color: #fff;
-  transition: color 0.3s;
+  margin-left: 20px;
 }
 
-.menu-list-item:hover {
-  color: #FFA500; /* Orange on hover */
-}
-
-.profile-container {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  padding-right: 10%;
-}
-
-.Home-cart-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.left-menu-icon {
-  font-size: 1.2rem;
-  color: #fff;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.left-menu-icon:hover {
-  color: #FFA500;
-}
-
-.btn {
+.menu-list-item a {
   text-decoration: none;
-  font-size: 1rem;
-  border: 2px solid #FFA500;
-  border-radius: 5px;
-  padding: 5px 10px;
-  background: none;
-  color: #FFA500;
-  transition: all 0.3s;
-}
-
-.btn:hover {
-  background-color: #FFA500;
+  font-size: 16px;
+  font-weight: 500;
   color: #fff;
+  transition: color 0.3s ease;
 }
 
-/* Responsive Design */
+.menu-list-item a:hover {
+  color: #a32104;
+}
+
+.profile-menu {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown button:hover {
+  background-color: #0056b3;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  padding: 0;
+}
+
+.logout-button:hover {
+  color: #a32104;
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .navbar-container {
-      flex-wrap: wrap;
-      justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .menu-container {
-      flex-grow: 1;
+    width: 100%;
+    margin-top: 10px;
   }
 
   .menu-list {
-      flex-direction: column;
-      gap: 10px;
+    flex-direction: column;
+    width: 100%;
   }
 
-  .profile-container {
-      justify-content: center;
+  .menu-list-item {
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 
-  
+  .profile-menu {
+    margin-top: 10px;
+  }
 }
 
-
-
-
-
-
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-   
 

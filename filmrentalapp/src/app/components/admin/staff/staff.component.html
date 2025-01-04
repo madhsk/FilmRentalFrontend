@@ -1,151 +1,151 @@
 <div class="container mt-5">
-    <!-- Navbar and Profile -->
-    <app-admin-navbar></app-admin-navbar>
-    <app-admin-profile></app-admin-profile>
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Staff Management</h2>
-        
-        <div class="mb-4">
-            <button class="btn btn-primary" (click)="showAddStaffForm = !showAddStaffForm">
-                {{ showAddStaffForm ? 'Hide Add Staff Form' : 'Add Staff' }}
-            </button>
-        </div>
-        <div *ngIf="showAddStaffForm">
-            <form (ngSubmit)="addStaff()" class="p-4 border rounded bg-light">
-                <h4 class="mb-4">Add Staff</h4>
-            
-                <div class="mb-3">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" id="firstName" class="form-control" [(ngModel)]="newStaff.firstName" name="firstName" required />
-                </div>
-            
-                <div class="mb-3">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" id="lastName" class="form-control" [(ngModel)]="newStaff.lastName" name="lastName" required />
-                </div>
-            
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" class="form-control" [(ngModel)]="newStaff.email" name="email" required />
-                </div>
-            
-                <div class="mb-3">
-                    <label for="store" class="form-label">Store</label>
-                    <select id="store" class="form-select" [(ngModel)]="newStaff.store" name="store" required>
-                        <option value="" disabled selected>Select a store</option>
-                        <option *ngFor="let store of stores" [ngValue]="store">{{ store.storeId }}</option>
-                    </select>
-                </div>
-            
-                <div class="mb-3">
-                    <label for="address" class="form-label">Address</label>
-                    <select id="address" class="form-select" [(ngModel)]="newStaff.address" name="address" required>
-                        <option value="" disabled selected>Select an address</option>
-                        <option *ngFor="let address of addresses" [ngValue]="address">{{ address.addressId }}</option>
-                    </select>
-                </div>
-            
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" id="username" class="form-control" [(ngModel)]="newStaff.username" name="username" required />
-                </div>
-            
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control" [(ngModel)]="newStaff.password" name="password" required />
-                </div>
-            
-                <div class="mb-3 form-check">
-                    <input type="checkbox" id="active" class="form-check-input" [(ngModel)]="newStaff.active" name="active" />
-                    <label for="active" class="form-check-label">Active</label>
-                </div>
-            
-                <button type="submit" class="btn btn-primary">Add Staff</button>
-            </form>
-        </div>
-        <!-- Search Form -->
-        <form class="row g-3">
-          <div class="col-md-4">
-            <label for="searchCriteria" class="form-label">Search By</label>
-            <select
-              class="form-select"
-              id="searchCriteria"
-              [(ngModel)]="searchCriteria"
-              name="searchCriteria">
-              <option value="" disabled selected>Choose...</option>
-              <option value="lastName">Last Name</option>
-              <option value="firstName">First Name</option>
-              <option value="email">Email</option>
-              <option value="city">City</option>
-              <option value="country">Country</option>
-              <option value="phone">Phone</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label for="searchValue" class="form-label">Search Value</label>
-            <input
-              type="text"
-              class="form-control"
-              id="searchValue"
-              [(ngModel)]="searchValue"
-              name="searchValue"
-              placeholder="Enter value"
-            />
-          </div>
-          <div class="col-md-4 d-flex align-items-end">
-            <button
-              type="button"
-              class="btn btn-primary me-2"
-              (click)="searchStaff()"
-              [disabled]="!searchCriteria || !searchValue"
-            >
-              Search
-            </button>
-            <button type="button" class="btn btn-secondary" (click)="resetSearch()">
-              Reset
-            </button>
-          </div>
-        </form>
+  <!-- Navbar and Profile -->
+  <app-admin-navbar></app-admin-navbar>
+  <app-admin-profile></app-admin-profile>
+  <div class="container mt-5">
+      <h2 class="text-center mb-4">Staff Management</h2>
       
-        <!-- Results Table -->
-        <div class="mt-4">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Staff ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>City</th>
-                <th>Update</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let staff of staffList">
-                <td>{{ staff.staffId }}</td>
-                <td>{{ staff.firstName }}</td>
-                <td>{{ staff.lastName }}</td>
-                <td>{{ staff.email }}</td>
-                <td>{{ staff.address?.phone }}</td>
-                <td>{{ staff.address?.district }}</td> <!-- Assuming 'district' is the city -->
-                <td>
-                    <select [(ngModel)]="selectedField" class="form-select">
-                        <option value="" disabled selected>Select field</option>
-                        <option value="firstName">First Name</option>
-                        <option value="lastName">Last Name</option>
-                        <option value="email">Email</option>
-                        <option value="phone">Phone</option>
-                      </select>
-                    <input type="text" [(ngModel)]="updateValue" placeholder="New value" class="form-control mt-2" />
-                    <button class="btn btn-success mt-2" (click)="updateStaff(staff.staffId)">Update</button>
-                  </td>
-              </tr>
-              <tr *ngIf="!staffList.length">
-                <td colspan="7" class="text-center">No results found.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="mb-4">
+          <button class="btn btn-primary" (click)="showAddStaffForm = !showAddStaffForm">
+              {{ showAddStaffForm ? 'Hide Add Staff Form' : 'Add Staff' }}
+          </button>
       </div>
+      <div *ngIf="showAddStaffForm">
+          <form (ngSubmit)="addStaff()" class="p-4 border rounded bg-light">
+              <h4 class="mb-4">Add Staff</h4>
+          
+              <div class="mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" id="firstName" class="form-control" [(ngModel)]="newStaff.firstName" name="firstName" required />
+              </div>
+          
+              <div class="mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" id="lastName" class="form-control" [(ngModel)]="newStaff.lastName" name="lastName" required />
+              </div>
+          
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" id="email" class="form-control" [(ngModel)]="newStaff.email" name="email" required />
+              </div>
+          
+              <div class="mb-3">
+                  <label for="store" class="form-label">Store</label>
+                  <select id="store" class="form-select" [(ngModel)]="newStaff.store" name="store" required>
+                      <option value="" disabled selected>Select a store</option>
+                      <option *ngFor="let store of stores" [ngValue]="store">{{ store.storeId }}</option>
+                  </select>
+              </div>
+          
+              <div class="mb-3">
+                  <label for="address" class="form-label">Address</label>
+                  <select id="address" class="form-select" [(ngModel)]="newStaff.address" name="address" required>
+                      <option value="" disabled selected>Select an address</option>
+                      <option *ngFor="let address of addresses" [ngValue]="address">{{ address.addressId }}</option>
+                  </select>
+              </div>
+          
+              <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" id="username" class="form-control" [(ngModel)]="newStaff.username" name="username" required />
+              </div>
+          
+              <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" id="password" class="form-control" [(ngModel)]="newStaff.password" name="password" required />
+              </div>
+          
+              <div class="mb-3 form-check">
+                  <input type="checkbox" id="active" class="form-check-input" [(ngModel)]="newStaff.active" name="active" />
+                  <label for="active" class="form-check-label">Active</label>
+              </div>
+          
+              <button type="submit" class="btn btn-primary">Add Staff</button>
+          </form>
+      </div>
+      <!-- Search Form -->
+      <form class="row g-3">
+        <div class="col-md-4">
+          <label for="searchCriteria" class="form-label">Search By</label>
+          <select
+            class="form-select"
+            id="searchCriteria"
+            [(ngModel)]="searchCriteria"
+            name="searchCriteria">
+            <option value="" disabled selected>Choose...</option>
+            <option value="lastName">Last Name</option>
+            <option value="firstName">First Name</option>
+            <option value="email">Email</option>
+            <option value="city">City</option>
+            <option value="country">Country</option>
+            <option value="phone">Phone</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="searchValue" class="form-label">Search Value</label>
+          <input
+            type="text"
+            class="form-control"
+            id="searchValue"
+            [(ngModel)]="searchValue"
+            name="searchValue"
+            placeholder="Enter value"
+          />
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button
+            type="button"
+            class="btn btn-primary me-2"
+            (click)="searchStaff()"
+            [disabled]="!searchCriteria || !searchValue"
+          >
+            Search
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="resetSearch()">
+            Reset
+          </button>
+        </div>
+      </form>
+    
+      <!-- Results Table -->
+      <div class="mt-4">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Staff ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>City</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let staff of staffList">
+              <td>{{ staff.staffId }}</td>
+              <td>{{ staff.firstName }}</td>
+              <td>{{ staff.lastName }}</td>
+              <td>{{ staff.email }}</td>
+              <td>{{ staff.address?.phone }}</td>
+              <td>{{ staff.address?.district }}</td> <!-- Assuming 'district' is the city -->
+              <td>
+                  <select [(ngModel)]="selectedField" class="form-select">
+                      <option value="" disabled selected>Select field</option>
+                      <option value="firstName">First Name</option>
+                      <option value="lastName">Last Name</option>
+                      <option value="email">Email</option>
+                      <option value="phone">Phone</option>
+                    </select>
+                  <input type="text" [(ngModel)]="updateValue" placeholder="New value" class="form-control mt-2" />
+                  <button class="btn btn-success mt-2" (click)="updateStaff(staff.staffId)">Update</button>
+                </td>
+            </tr>
+            <tr *ngIf="!staffList.length">
+              <td colspan="7" class="text-center">No results found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 </div>

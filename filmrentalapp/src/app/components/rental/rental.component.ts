@@ -3,10 +3,10 @@ import { RentalService } from '../../service/rental.service';
 import { Rental } from '../../model/rental';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { NavbarComponent1 } from '../navbar/navbar.component';
 @Component({
   selector: 'app-rental',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent1],
   templateUrl: './rental.component.html',
   styleUrls: ['./rental.component.css']
 })

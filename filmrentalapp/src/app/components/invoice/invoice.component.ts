@@ -1,37 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent1 } from "../navbar/navbar.component"; 
 
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css'],
+  imports: [CommonModule, NavbarComponent1], 
+  standalone: true, 
 })
 export class InvoiceComponent implements OnInit {
-  customer: any = {};
-  film: any = {};
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation?.extras.state) {
-      this.customer = navigation.extras.state['customer'];
-      this.film = navigation.extras.state['film'];
-      console.log('Received Customer:', this.customer);
-      console.log('Received Film:', this.film);
-  
-      // If customer or film is still null, you can log this as well
-      if (!this.customer || !this.film) {
-        console.error('Customer or Film data is missing in InvoiceComponent');
-      }
-    } else {
-      console.error('No state data found in the navigation');
+  customer: any = null;
+  film: any = null;
+  payment: any = null;
+ 
+  constructor(private router: Router) {
+    const state = this.router.getCurrentNavigation()?.extras.state;
+    if (state) {
+      this.customer = state['customer'];
+      this.film = state['film'];
+      this.payment = state['payment'];
     }
   }
-  
-
-  downloadInvoice() {
-    console.log('Downloading invoice...');
-    alert('Invoice downloaded successfully!');
+ 
+  ngOnInit(): void {
+    if (!this.customer || !this.film || !this.payment) {
+      console.error('Invoice data is incomplete.');
+    }
+  }
+  printInvoice() {
+    console.log('Printing invoice...');
+    alert('Invoice Printed successfully!');
+    this.router.navigate(["/staff-film"]);
   }
 }
+ 
+ 

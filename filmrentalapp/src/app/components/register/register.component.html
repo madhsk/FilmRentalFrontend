@@ -1,79 +1,69 @@
 <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow-sm">
-          <div class="card-header bg-primary text-white text-center">
-            <h3>Register User</h3>
-          </div>
-          <div class="card-body">
-            <form [formGroup]="registerForm" (ngSubmit)="register()">
-              <!-- User ID -->
-              <div class="mb-3">
-                <label class="form-label">Enter User Name/ID</label>
-                <input
-                  type="text"
-                  formControlName="username"
-                  class="form-control"
-                  placeholder="Enter your user ID"
-                />
-                <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="text-danger">
-                  <small *ngIf="registerForm.get('username')?.errors?.['required']">Username is required.</small>
-                  <small *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 4 characters long.</small>
-                  <small *ngIf="registerForm.get('username')?.errors?.['maxlength']">Username must not exceed 20 characters.</small>
-                </div>
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+          <h3>Register User</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <!-- User ID -->
+            <div class="mb-3">
+              <label class="form-label">Enter User Name/ID</label>
+              <input
+                type="text"
+                formControlName="username"
+                class="form-control"
+                placeholder="Enter your user ID"
+              />
+              <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="text-danger">
+                <small *ngIf="registerForm.get('username')?.errors?.['required']">Username is required.</small>
+                <small *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 4 characters long.</small>
+                <small *ngIf="registerForm.get('username')?.errors?.['maxlength']">Username must not exceed 20 characters.</small>
               </div>
-  
-              <!-- Password -->
-              <div class="mb-3">
-                <label class="form-label">Enter Password</label>
-                <input
-                  type="password"
-                  formControlName="password"
-                  class="form-control"
-                  placeholder="Enter your password"
-                />
-                <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-danger">
-                  <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
-                  <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
-                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label">Enter Password</label>
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control"
+                placeholder="Enter your password"
+              />
+              <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-danger">
+                <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+                <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
               </div>
-  
-              <!-- Submit Button -->
-              <div class="text-center">
-                <button type="submit" class="btn btn-success w-100" [disabled]="registerForm.invalid">Register User</button>
-              </div>
-            </form>
-          </div>
-          <div class="card-footer text-center">
-            <small class="text-muted">Please provide valid information to register.</small>
-          </div>
-          <div
-                    class="modal fade show d-block"
-                    *ngIf="showModal"
-                    style="background-color: rgba(0, 0, 0, 0.5);"
-                    >
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{ message }}</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button
-                            type="button"
-                            class="btn btn-secondary"
-                            (click)="showModal = false"
-                            >
-                            Close
-                            </button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-success w-100" [disabled]="registerForm.invalid" >Register User</button>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer text-center">
+          <small class="text-muted">Please provide valid information to register.</small>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
 
-
-  
+<!-- Modal -->
+<div class="modal fade show d-block" *ngIf="showModal" style="background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ message }}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="showModal = false">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

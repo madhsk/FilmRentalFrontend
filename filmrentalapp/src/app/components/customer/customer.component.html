@@ -1,101 +1,109 @@
-<div class="container mt-5">
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Customer Management</h2>
 
-  <!-- Button to Toggle "Create New Customer" Form -->
-  <div class="text-center mb-4">
-    <button class="btn btn-primary" (click)="showCreateCustomerForm = !showCreateCustomerForm">
-      {{ showCreateCustomerForm ? 'Hide' : 'Add New Customer' }}
-    </button>
-  </div>
+  <!-- Form to add a new customer -->
+  <form class="mb-4" (ngSubmit)="createCustomer()">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="newCustomer.firstName" name="firstName" required />
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="newCustomer.lastName" name="lastName" required />
+      </div>
+      <div class="col-md-3">
+        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="newCustomer.email" name="email" required />
+      </div>
+      <!-- <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="newCustomer.phone" name="phone" required />
+      </div> -->
+      <div class="col-md-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary">Add Customer</button>
+      </div>
+    </div>
+  </form>
 
-  <!-- Create New Customer Form -->
-  <div class="card mx-auto" style="max-width: 600px;" *ngIf="showCreateCustomerForm">
-    <div class="card-header bg-dark text-white text-center">
-      <h4>Create New Customer</h4>
+  <div class="container mt-5">
+  
+    <!-- Input for Search Criteria -->
+    <div class="form-group">
+      <label for="searchType">Search By:</label>
+      <select
+        id="searchType"
+        class="form-control"
+        [(ngModel)]="searchType"
+      >
+        <option value="lastname">Last Name</option>
+        <option value="firstname">First Name</option>
+        <option value="email">Email</option>
+        <option value="phone">Phone</option>
+        <option value="city">City</option>
+        <option value="country">Country</option>
+        <option value="active">Active Customers</option>
+        <option value="inactive">Inactive Customers</option>
+      </select>
     </div>
-    <div class="card-body">
-      <form (ngSubmit)="createCustomer(newCustomer)">
-        <div class="form-group mb-3">
-          <label for="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            class="form-control"
-            [(ngModel)]="newCustomer.firstName"
-            name="firstName"
-            required
-          />
-        </div>
-        <div class="form-group mb-3">
-          <label for="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            class="form-control"
-            [(ngModel)]="newCustomer.lastName"
-            name="lastName"
-            required
-          />
-        </div>
-        <div class="form-group mb-3">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            [(ngModel)]="newCustomer.email"
-            name="email"
-            required
-          />
-        </div>
-        <!-- <div class="form-group mb-3">
-          <label for="phone">Phone</label>
-          <input
-            type="text"
-            id="phone"
-            class="form-control"
-            [(ngModel)]="newCustomer.phone"
-            name="phone"
-            required
-          />
-        </div> -->
-        <button type="submit" class="btn btn-success w-100">Create Customer</button>
-      </form>
+  
+    <!-- Input Field -->
+    <div *ngIf="requiresInput()" class="form-group mt-3">
+      <label for="searchValue">Enter Value:</label>
+      <input
+        id="searchValue"
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchValue"
+        placeholder="Enter value to search"
+      />
     </div>
-  </div>
-
-  <!-- Customers Table -->
-  <div class="card mt-4">
-    <div class="card-header bg-dark text-white text-center">
-      <h4>Customer List</h4>
-    </div>
-    <div class="card-body">
-      <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>City</th>
-            <th>Country</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let customer of customers">
-            <td>{{ customer.firstName }}</td>
-            <td>{{ customer.lastName }}</td>
-            <td>{{ customer.email }}</td>
-            <td>{{ customer.address?.phone }}</td>
-            <td>{{ customer.address?.city?.cityName }}</td>
-            <td>{{ customer.address?.city?.country?.country }}</td>
-            <td>
-              <!-- <button class="btn btn-warning btn-sm me-2" (click)="updateCustomerInfo(customer.id)">Edit</button>
-              <button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer.id)">Delete</button> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  
+    <!-- Button to Search -->
+    <button class="btn btn-primary mt-3" (click)="searchCustomers()">Search</button>
+  
+    <!-- No Results Found -->
+    <div class="alert alert-info mt-3" *ngIf="customers.length === 0 && showNoResults">
+      No results found.
     </div>
   </div>
+  
+  <br/>
+
+  <!-- Display customer data -->
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Phone</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ customer.firstName }}</td>
+        <td>{{ customer.lastName }}</td>
+        <td>{{ customer.email }}</td>
+        <!-- <td>{{ customer.phone }}</td> -->
+        <td>
+          <span class="badge" [ngClass]="{ 'bg-success': customer.active, 'bg-danger': !customer.active }">
+            {{ customer.active ? 'Active' : 'Inactive' }}
+          </span>
+        </td>
+        <td>{{customer.address?.phone}}</td>
+        <td>{{customer.address?.city?.cityName}}</td>
+        <td>{{customer.address?.city?.country?.country}}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="editCustomer(customer)">Edit</button>
+          <!-- <button class="btn btn-sm btn-danger" (click)="updateCustomerStatus(customer.id, !customer.active)">
+            {{ customer.active ? 'Deactivate' : 'Activate' }}
+          </button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
 </div>

@@ -15,6 +15,7 @@ import { LoginComponent1 } from './components/login/login.component';
 import { RegisterComponent1 } from './components/register/register.component';
 import { FilmComponent1 } from './components/film/film.component';
 import { CustomerComponent } from './components/customer/customer.component';
+import { Staff1Component } from './components/staff1/staff1.component';
 export const routes: Routes = [
     {path:'admin-register',component: RegisterComponent}, 
     {path:'admin-login',component:LoginComponent},
@@ -30,6 +31,7 @@ export const routes: Routes = [
     {path: 'app-register', component: RegisterComponent1},
     {path:'payment/:filmId',component:PaymentComponent},
     {path:'invoice', component:InvoiceComponent},
-    {path:'customer-details',component:CustomerComponent}
+    {path:'customer-details',component:CustomerComponent},
+    {path:'staff-detail',component:Staff1Component}
 ];
  

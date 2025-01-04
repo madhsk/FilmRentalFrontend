@@ -18,6 +18,9 @@ export class NavbarComponent1 {
         return false;
       }
      }
+     staffDetail(){
+      this.router.navigate(['/staff-detail']);
+     }
     logout(){
       localStorage.removeItem('token');
       sessionStorage.removeItem('token');

@@ -1,4 +1,4 @@
-<div class="navbar-container" style="margin-top:-20px;">
+<div class="navbar-container">
     <div class="logo-box">
       <img src="assets/logo.png" alt="MovieNest" width="80" height="70" class="d-inline-block align-top"/>
     </div> 
@@ -8,9 +8,11 @@
     <div class="menu-container">
       <ul class="menu-list">
         <li class="menu-list-item"><a routerLink="/" href="/">Home</a></li>
-        <li class="menu-list-item"><a routerLink="/rental" href="/rental">Rental</a></li>
+        <li class="menu-list-item" *ngIf="!isAuthenticated()"><a href="#service">Service</a></li>
+        <li class="menu-list-item" *ngIf="!isAuthenticated()"><a href="#contact">Contact Us</a></li>
         <li class="menu-list-item" *ngIf="!isAuthenticated()"><a routerLink="/app-login" href="/app-login">Login</a></li>
         <li class="menu-list-item" *ngIf="!isAuthenticated()"><a routerLink="/app-register" href="/app-register">Register</a></li>
+        <li class="menu-list-item" *ngIf="isAuthenticated()"><a routerLink="/rental" href="/rental">Rental</a></li>
         <li class="menu-list-item" *ngIf="isAuthenticated()"><a routerLink="/customer-details" href="/customer-details">Customer Details</a></li>
       </ul>
     </div>
@@ -20,6 +22,7 @@
           Profile
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><button (click)="staffDetail()" class="dropdown-item logout-button">add</button></li>
           <li><button (click)="logout()" class="dropdown-item logout-button">Logout</button></li>
         </ul>
       </div>

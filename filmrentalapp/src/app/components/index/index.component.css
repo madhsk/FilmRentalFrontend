@@ -1,222 +1,236 @@
-/* General Styles */
-body {
+/* General body and layout settings */
+.app-body {
   font-family: 'Roboto', sans-serif;
-  background-color: black;
-  color: white;
   margin: 0;
   padding: 0;
-}
-.spin-container {
-  animation: spin -1s infinite; /* Change 10s to a higher value for slower spin */
-  padding-right :30% ;
-  padding-left: 12% ;
-  padding-top: 10%
+  background-color: black;
 }
 
-@keyframes spin {
- 
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Featured Section */
+.featured-content {
+  position: relative;
+  color: white;
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  padding: 50px 20px;
 }
- 
 
-/* Spin container styling */
-.spin-container img {
-  animation: spin 5s linear infinite; /* Adjust time for speed */
-  display: block; /* Center the image */
-  margin: 0 auto; /* Center the image horizontally */
+.featured-title {
+  max-width: 100%;
+  height: auto;
 }
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
- 
-h1, h2, h3 {
-  color: #a32104; /* Accent color for headings */
-}
- 
-p {
-  line-height: 1.6;
-}
- 
-/* Flex Container */
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+.featured-desc h3 {
+  font-family: 'Sen', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
   margin-bottom: 20px;
 }
- 
-/* Featured Content */
-.featured-content {
-  flex: 1;
-  padding: 20px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
-  background-size: cover;
-  color: white;
+
+.featured-desc p {
+  font-size: 16px;
+  line-height: 1.6;
 }
- 
-.featured-title {
-  width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
-}
- 
-/* Spin Container */
+
+/* Spin container */
 .spin-container {
-  flex: 1;
-  text-align: center;
-}
- 
-/* Button Styles */
-.featured-button, .cta-button {
-  background-color: #a32104;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
- 
-.featured-button:hover, .cta-button:hover {
-  background-color: #8a1a02;
-}
- 
-/* Services Section */
-.services-container {
-  margin: 40px 0;
-}
- 
-.services-wrapper {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
- 
-.service-item {
-  text-align: center;
-  max-width: 200px;
-  margin: 10px;
-}
- 
-.service-item i {
-  color: #a32104;
-  font-size: 40px;
-  margin-bottom: 10px;
-}
- 
-/* Call to Action Section */
-.cta-container {
-  text-align: center;
-  margin: 40px 0;
-}
- 
-/* Testimonials Section */
-.testimonials-container {
-  margin: 40px 0;
-}
- 
-.testimonials-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
- 
-.testimonial-item {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 5px;
-  margin: 10px 0;
-  max-width: 600px;
-  text-align: center;
-}
- 
-/* Contact Us Section */
-.contact-container {
-  margin: 40px 0;
-}
- 
-.contact-details {
-  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  padding: 20px;
 }
- 
+
+/* Services Section */
+.services-container {
+  padding: 60px 0;
+  background-color: black;
+  color: #fff;
+}
+
+.services-container .section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #a32104;
+}
+
+.service-item {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.service-item i {
+  color: #a32104;
+  margin-bottom: 20px;
+}
+
+.service-item h3 {
+  font-weight: 700;
+  font-size: 22px;
+  color: wheat;
+  margin-bottom: 15px;
+}
+
+.service-item p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+/* Call to Action Section */
+.cta-container {
+  background-color: #a32104;
+  color: white;
+  padding: 40px 20px;
+}
+
+.cta-container h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.cta-container p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  background-color: #fff;
+  color: #a32104;
+  padding: 10px 25px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cta-button:hover {
+  background-color: #a32104;
+  color: white;
+}
+
+/* Testimonials Section */
+.testimonials-container {
+  padding: 60px 0;
+  background-color: black;
+}
+
+.testimonials-container .section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #a32104;
+}
+
+.testimonial-item {
+  background-color: black;
+  border-radius: 5px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.testimonial-item p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.testimonial-item span {
+  font-weight: 700;
+  color: wheat;
+}
+
+/* Contact Section */
+.contact-container {
+  background-color: black;
+  padding: 60px 0;
+}
+
+.contact-container .section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #a32104;
+}
+
+.contact-details p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
 .contact-details i {
+  color: #a32104;
   margin-right: 10px;
-  font-size: 20px;
 }
 
-/* Media Query for 15-inch Laptop (1920x1080) */
-@media screen and (min-width: 1600px) and (max-width: 1920px) {
-  .container {
-    max-width: 1400px;
-  }
-  
-  h1, h2, h3 {
-    font-size: 28px;
-  }
-  
-  p {
-    font-size: 16px;
-  }
+.contact-details a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
 
-  .service-item {
-    max-width: 220px;
-  }
-  
-  .featured-button, .cta-button {
-    font-size: 18px;
-    padding: 12px 25px;
-  }
+.contact-details a:hover {
+  color: #a32104;
+}
+/* Spin the Movie CD */
+.spin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: spin 5s linear infinite;  /* Applying the animation */
+}
 
-  .testimonials-wrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+.spin-container img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+}
 
-  .testimonial-item {
-    max-width: 500px;
-    font-size: 16px;
+/* Define the spinning animation */
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .featured-content {
+      text-align: center;
+      padding: 40px 20px;
   }
 
   .featured-title {
-    max-width: 600px;
+      width: 70%;
+      padding: 0;
   }
 
-  .flex-container {
-    flex-direction: row;
-    gap: 20px;
+  .featured-desc {
+      text-align: center;
   }
 
-  .spin-container {
-    padding: 20px;
+  .service-item {
+      margin-bottom: 20px;
+  }
+
+  .testimonial-item {
+      margin-bottom: 20px;
   }
 }
 
-/* Additional Media Query for Smaller Laptops */
-@media screen and (max-width: 1600px) {
-  .container {
-    max-width: 1000px;
-    padding: 10px;
-  }
-  
-  .featured-content {
-    padding: 15px;
-  }
-  
-  .service-item {
-    max-width: 180px;
-  }
-  
-  .cta-button, .featured-button {
-    font-size: 14px;
-    padding: 8px 15px;
+@media (max-width: 576px) {
+  .cta-button {
+      width: 100%;
   }
 }

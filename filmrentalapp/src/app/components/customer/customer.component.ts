@@ -3,27 +3,41 @@ import { CustomerService } from '../../service/customer.service';
 import { Customer } from '../../model/Customer';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-customer',
-  imports:[CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.css'],
 })
 export class CustomerComponent implements OnInit {
+  searchType: string = '';
+  searchValue: string = '';
+  customers: any[] = [];
+  showNoResults: boolean = false;
   showCreateCustomerForm: boolean = false;
-  customers: Customer[] = [];
+  // customers: Customer[] = [];
   selectedCustomer: Customer | null = null;
-  newCustomer: Customer={
-    //customerId: 0,
+
+  newCustomer: Customer = {
     firstName: '',
     lastName: '',
     email: '',
     active: false,
-    address: undefined,
+    address: {
+      phone: '',
+      city: {
+        cityName: '',
+        country: {
+          countryName: '',
+        },
+      },
+    },
     store: undefined,
     createDate: '',
-    lastUpdate: ''
-  }
+    lastUpdate: '',
+  };
+
   constructor(private customerService: CustomerService) {}
 
   ngOnInit(): void {
@@ -33,8 +47,8 @@ export class CustomerComponent implements OnInit {
   fetchActiveCustomers(): void {
     this.customerService.getActiveCustomers().subscribe({
       next: (data: Customer[]) => {
+        console.log(data)
         this.customers = data;
-        console.log(data);
       },
       error: (err) => {
         console.error('Error fetching active customers:', err);
@@ -42,22 +56,13 @@ export class CustomerComponent implements OnInit {
     });
   }
 
-  fetchAllCustomers(): void {
-    this.customerService.getAllCustomers().subscribe({
-      next: (data: Customer[]) => {
-        this.customers = data;
-      },
-      error: (err) => {
-        console.error('Error fetching all customers:', err);
-      },
-    });
-  }
-
-  createCustomer(newCustomer: Customer): void {
-    this.customerService.createCustomer(newCustomer).subscribe({
-      next: () => {
+  createCustomer(): void {
+    const newCustomerCopy = { ...this.newCustomer };
+    this.customerService.createCustomer(newCustomerCopy).subscribe({
+      next: (data: Customer) => {
         alert('Customer created successfully!');
-        this.fetchActiveCustomers();
+        this.customers.push(data);
+        this.resetForm();
       },
       error: (err) => {
         console.error('Error creating customer:', err);
@@ -66,29 +71,92 @@ export class CustomerComponent implements OnInit {
     });
   }
 
-  updateCustomerFirstName(customerId: number, newFirstName: string): void {
-    this.customerService.updateFirstName(customerId, newFirstName).subscribe({
-      next: () => {
-        alert('Customer information updated successfully!');
-        this.fetchActiveCustomers();
+  resetForm(): void {
+    this.newCustomer = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      active: false,
+      address: {
+        phone: '',
+        city: {
+          cityName: '',
+          country: {
+            countryName: '',
+          },
+        },
       },
-      error: (err) => {
-        console.error('Error updating customer:', err);
-        alert('Failed to update customer.');
-      },
-    });
+      store: undefined,
+      createDate: '',
+      lastUpdate: '',
+    };
+    this.showCreateCustomerForm = false;
+    this.selectedCustomer = null;
   }
 
-  deleteCustomer(customerId: number): void {
-    this.customerService.deleteCustomer(customerId).subscribe({
-      next: () => {
-        alert('Customer deleted successfully!');
-        this.fetchActiveCustomers();
-      },
-      error: (err) => {
-        console.error('Error deleting customer:', err);
-        alert('Failed to delete customer.');
-      },
-    });
+  editCustomer(customer: Customer): void {
+    this.selectedCustomer = { ...customer };
+    this.newCustomer = { ...customer };
+    this.showCreateCustomerForm = true;
+  }
+  requiresInput(): boolean {
+    // Return false for 'active' and 'inactive' as they don't require input
+    return this.searchType !== 'active' && this.searchType !== 'inactive';
+  }
+
+  searchCustomers(): void {
+    this.showNoResults = false;
+    this.customers = [];
+
+    if (this.searchType === 'lastname') {
+      this.customerService.searchByLastName(this.searchValue).subscribe(
+        (data) => (this.customers = data),
+        (error) => console.error(error)
+      );
+    } else if (this.searchType === 'firstname') {
+      this.customerService.searchByFirstName(this.searchValue).subscribe(
+        (data) => (this.customers = data),
+        (error) => console.error(error)
+      );
+    } else if (this.searchType === 'email') {
+      this.customerService.searchByEmail(this.searchValue).subscribe(
+        (data) => (this.customers = data),
+        (error) => console.error(error)
+      );
+    } else if (this.searchType === 'phone') {
+      this.customerService.searchByPhone(this.searchValue).subscribe(
+        (data) => (this.customers = data),
+        (error) => console.error(error)
+      );
+    } else if (this.searchType === 'city') {
+      this.customerService.searchByCity(this.searchValue).subscribe(
+        (data) => (this.customers = data),
+        (error) => console.error(error)
+      );
+    } else if (this.searchType === 'country') {
+      this.customerService.searchByCountry(this.searchValue).subscribe(
+        (data) => (this.customers = data),
+        (error) => console.error(error)
+      );
+    } else if (this.searchType === 'active') {
+      this.customerService.getActiveCustomers().subscribe(
+        (data) => (this.customers = data),
+        (error) => console.error(error)
+      );
+    } else if (this.searchType === 'inactive') {
+      this.customerService.getInactiveCustomers().subscribe(
+        (data) => (this.customers = data),
+        (error) => console.error(error)
+      );
+    } else {
+      console.error('Invalid search type.');
+    }
+
+    // Show "No Results Found" message if no customers are returned
+    setTimeout(() => {
+      if (this.customers.length === 0) {
+        this.showNoResults = true;
+      }
+    }, 500);
   }
 }
