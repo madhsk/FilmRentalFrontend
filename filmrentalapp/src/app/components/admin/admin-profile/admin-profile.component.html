@@ -1,0 +1,11 @@
+<div class="profile-menu">
+  <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          Admin Profile
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          
+          <li *ngIf="isAuthenticated()"><button (click)="logout()" class="dropdown-item logout-button" >Logout</button></li>
+      </ul>
+  </div>
+</div>

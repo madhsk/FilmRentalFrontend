@@ -1,0 +1,103 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>Movie Nest</title>    
+</head>
+
+
+<body>
+    <app-navbar1></app-navbar1>
+    <div class="container">
+        <div class="content-container">
+            <div class="flex-container">
+                <div class="featured-content"
+                    style="background: linear-gradient(to bottom, rgba(0,0,0,0), black), url('as/f-1.jpg');">
+                    <img class="featured-title" src="assets\MovieUniverse.jpg" alt="" style="padding: 13%; width: 450px; padding-bottom: 4px;">
+                    
+                    <div class="featured-desc">
+                        <h3 style="color: #a32104; padding-left: 20%; ">From Classics to New Releases – Rent Your Next Favorite Film! </h3>
+                        <p >Escape to a world of cinematic wonders!
+                             Browse our extensive library of new releases, classic favorites, foreign films, documentaries, and more. 
+                            We have something for everyone in the family. Come in and let us help you find the perfect film for your next movie night.</p>
+                    </div>
+                </div>
+                <div class ="spin-container">
+                    <img src="assets/MovieCD.png" style="width: 400px;height: 400px; ">
+                </div>
+            </div>
+                
+                        <!-- Services Section -->
+                        <div class="services-container">
+                            <h1 class="section-title">Our Services</h1>
+                            <div class="services-wrapper">
+                                <div class="service-item">
+                                    <i class="fas fa-film fa-3x"></i>
+                                    <h3>Extensive Movie Library</h3>
+                                    <p>From classic films to the latest blockbusters, find your perfect movie for any mood or occasion.</p>
+                                </div>
+                                <div class="service-item">
+                                    <i class="fas fa-users fa-3x"></i>
+                                    <h3>Family-Friendly Options</h3>
+                                    <p>We cater to all ages, ensuring fun and entertainment for the entire family.</p>
+                                </div>
+                                <div class="service-item">
+                                    <i class="fas fa-truck fa-3x"></i>
+                                    <h3>Doorstep Delivery</h3>
+                                    <p>Conveniently rent and receive your favorite films at your doorstep with our reliable delivery service.</p>
+                                </div>
+                                <div class="service-item">
+                                    <i class="fas fa-credit-card fa-3x"></i>
+                                    <h3>Easy Payment Options</h3>
+                                    <p>Secure and simple payment methods, including Razorpay and credit/debit cards.</p>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Call to Action Section -->
+                        <div class="cta-container">
+                            <h2>Ready for Your Next Movie Night?</h2>
+                            <p>Explore our services, find your favorite films, and enjoy a seamless rental experience.</p>
+                            <button class="cta-button" (click)="exploreServices()">Explore Services</button>
+                        </div>
+                
+                        <!-- Customer Testimonials -->
+                        <div class="testimonials-container">
+                            <h1 class="section-title">What Our Customers Say</h1>
+                            <div class="testimonials-wrapper">
+                                <div class="testimonial-item">
+                                    <p>"Movie Nest made our family movie night so easy and fun! Highly recommend their doorstep delivery service."</p>
+                                    <span>- Jane D.</span>
+                                </div>
+                                <div class="testimonial-item">
+                                    <p>"The variety of movies available is amazing. I was able to find classics I haven’t seen in years!"</p>
+                                    <span>- Mark T.</span>
+                                </div>
+                                <div class="testimonial-item">
+                                    <p>"The service is excellent, and the payment process is super convenient. A must-try for all movie lovers!"</p>
+                                    <span>- Sarah L.</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Contact Us Section -->
+                        <div class="contact-container">
+                            <h1 class="section-title">Contact Us</h1>
+                            <p>Have questions? Need help? Reach out to us, and we'll be happy to assist you.</p>
+                            <div class="contact-details">
+                                <p><i class="fas fa-phone"></i> +1 (800) 123-4567</p>
+                                <p><i class="fas fa-envelope"></i> support.com</p>
+                                <p><i class="fas fa-map-marker-alt"></i> 123 Movie Lane, Hollywood, CA</p>
+                                <a *ngIf="!isAuthenticated()" routerLink="/admin-login" href="/admin-login">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="app.js"></script>
+                
+                

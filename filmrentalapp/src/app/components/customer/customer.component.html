@@ -1,0 +1,101 @@
+<div class="container mt-5">
+
+  <!-- Button to Toggle "Create New Customer" Form -->
+  <div class="text-center mb-4">
+    <button class="btn btn-primary" (click)="showCreateCustomerForm = !showCreateCustomerForm">
+      {{ showCreateCustomerForm ? 'Hide' : 'Add New Customer' }}
+    </button>
+  </div>
+
+  <!-- Create New Customer Form -->
+  <div class="card mx-auto" style="max-width: 600px;" *ngIf="showCreateCustomerForm">
+    <div class="card-header bg-dark text-white text-center">
+      <h4>Create New Customer</h4>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="createCustomer(newCustomer)">
+        <div class="form-group mb-3">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            [(ngModel)]="newCustomer.firstName"
+            name="firstName"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            [(ngModel)]="newCustomer.lastName"
+            name="lastName"
+            required
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            [(ngModel)]="newCustomer.email"
+            name="email"
+            required
+          />
+        </div>
+        <!-- <div class="form-group mb-3">
+          <label for="phone">Phone</label>
+          <input
+            type="text"
+            id="phone"
+            class="form-control"
+            [(ngModel)]="newCustomer.phone"
+            name="phone"
+            required
+          />
+        </div> -->
+        <button type="submit" class="btn btn-success w-100">Create Customer</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Customers Table -->
+  <div class="card mt-4">
+    <div class="card-header bg-dark text-white text-center">
+      <h4>Customer List</h4>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers">
+            <td>{{ customer.firstName }}</td>
+            <td>{{ customer.lastName }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.address?.phone }}</td>
+            <td>{{ customer.address?.city?.cityName }}</td>
+            <td>{{ customer.address?.city?.country?.country }}</td>
+            <td>
+              <!-- <button class="btn btn-warning btn-sm me-2" (click)="updateCustomerInfo(customer.id)">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer.id)">Delete</button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

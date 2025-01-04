@@ -1,0 +1,38 @@
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="../../../assets/logo.png" alt="MovieNest" />
+    </div>
+    <br />
+    <br />
+    <h2>Invoice</h2>
+    <ul>
+      <li><strong>Store Id :</strong>1</li>
+      <li><strong>Staff Id :</strong> 1</li>
+      <li><strong>Staff Name :</strong>Joe</li>
+      <li><strong>Customer Name:</strong> {{ customer?.name || 'N/A' }}</li>
+      <li><strong>Customer Email:</strong> {{ customer?.email || 'N/A' }}</li>
+      <li><strong>Transaction ID:</strong> #123456789</li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>S. No.</th>
+          <th>Film Title</th>
+          <th>Rental Duration</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>{{film?.title}}</td>
+          <td>{{film?.rental_duration}}</td>
+          
+        </tr>
+      
+      </tbody>
+    </table>
+    <button (click)="downloadInvoice()">Download Invoice</button>
+  </div>
+</body>

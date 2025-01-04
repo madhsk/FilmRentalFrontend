@@ -1,0 +1,111 @@
+/* Sidebar styles */
+.sidebar {
+  height: 100vh; /* Full height */
+  position: fixed; /* Fixed sidebar */
+  top: 0;
+  left: 0;
+  background-color: #343a40; /* Dark background */
+  color: white;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+  width: 250px;
+}
+
+.sidebar.collapsed {
+  width: 70px; /* Smaller width when collapsed */
+}
+
+.sidebar h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar.collapsed h3 {
+  display: none; /* Hide the header when collapsed */
+}
+
+.sidebar ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebar .nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #343a40; /* Hover and active background */
+}
+
+.sidebar .nav-link i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.sidebar.collapsed .nav-link {
+  justify-content: center;
+}
+
+.sidebar.collapsed .nav-link i {
+  margin-right: 0; /* Remove margin when collapsed */
+}
+
+.sidebar.collapsed .nav-link span {
+  display: none; /* Hide text when collapsed */
+}
+
+/* Toggle button styles */
+/* Toggle button styles */
+.toggle-btn {
+  background-color: #343a40; /* Match the sidebar background color */
+  color: white; /* White color for the icon */
+  border: none; /* Remove border */
+  cursor: pointer;
+  font-size: 1.2rem; /* Adjust icon size */
+  border-radius: 4px; /* Optional: rounded corners */
+  padding: 5px; /* Add some padding for better visibility */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Hover effect for better user feedback */
+.toggle-btn:hover {
+  background-color: #495057; /* Slightly lighter color on hover */
+}
+
+/* Make the entire navbar item selectable */
+.nav-link {
+  display: flex; /* Ensure the content (icon and text) stays aligned */
+  align-items: center; /* Vertically align the content */
+  padding: 10px 20px; /* Add some padding for a better clickable area */
+  width: 100%; /* Ensure it spans the full width of the sidebar */
+  text-decoration: none; /* Remove the underline from links */
+  color: white; /* Default text color */
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #495057; /* Highlight color for hover/active states */
+  color: white; /* Ensure text color remains visible */
+  border-radius: 4px; /* Optional: rounded edges */
+}
+
+/* Align the text and icon with some spacing */
+.nav-link i {
+  margin-right: 10px; /* Add space between the icon and text */
+}

@@ -1,0 +1,210 @@
+<div class="container mt-4">
+    <app-admin-navbar></app-admin-navbar>
+    <app-admin-profile></app-admin-profile>
+    <h2 class="text-center mb-4">Store Management</h2>
+  
+    <!-- Add New Store -->
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">Add New Store</div>
+      <div class="card-body">
+        <form (submit)="addStore(); $event.preventDefault()">
+          <div class="form-group mb-3">
+            <label for="address" class="form-label">Address</label>
+              <select id="address" class="form-select" [(ngModel)]="newStore.address" name="address" required>
+                <option value="" disabled selected>Select an address</option>
+                <option *ngFor="let address of addresses" [ngValue]="address">{{ address.address }}</option>
+              </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="manager">Manager Name</label>
+            <select id="manager" class="form-select" [(ngModel)]="newStore.manager" name="manager" required>
+                <option value="" disabled selected>Select an manager</option>
+                <option *ngFor="let manager of managers" [ngValue]="manager">{{ manager.firstName }}</option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="manager">Last Update</label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="lastUpdate"
+              [(ngModel)]="newStore.lastUpdate"
+              name="lastUpdate"
+            />
+          </div>
+          <button type="submit" class="btn btn-success">Add Store</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Assign Address to Store -->
+    <div class="card mb-4">
+      <div class="card-header bg-secondary text-white">Assign Address to Store</div>
+      <div class="card-body">
+        <form (submit)="assignAddressToStore(); $event.preventDefault()">
+          <div class="form-group mb-3">
+            <label for="storeId">Store ID</label>
+            <input
+              type="number"
+              class="form-control"
+              id="storeId"
+              placeholder="Enter store ID"
+              [(ngModel)]="storeId"
+              name="storeId"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="addressId">Address ID</label>
+            <input
+              type="number"
+              class="form-control"
+              id="addressId"
+              placeholder="Enter address ID"
+              [(ngModel)]="addressId"
+              name="addressId"
+            />
+          </div>
+          <button type="submit" class="btn btn-warning">Assign Address</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Filter Stores by City -->
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">Filter Stores by City</div>
+      <div class="card-body">
+        <form (submit)="filterByCity(); $event.preventDefault()">
+          <div class="form-group mb-3">
+            <label for="cityFilter">City</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cityFilter"
+              placeholder="Enter city name"
+              [(ngModel)]="cityFilter"
+              name="cityFilter"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Filter Stores by Country -->
+    <div class="card mb-4">
+      <div class="card-header bg-info text-white">Filter Stores by Country</div>
+      <div class="card-body">
+        <form (submit)="filterByCountry(); $event.preventDefault()">
+          <div class="form-group mb-3">
+            <label for="countryFilter">Country</label>
+            <input
+              type="text"
+              class="form-control"
+              id="countryFilter"
+              placeholder="Enter country name"
+              [(ngModel)]="countryFilter"
+              name="countryFilter"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Update Store Phone Number -->
+    <div class="card mb-4">
+      <div class="card-header bg-dark text-white">Update Store Phone Number</div>
+      <div class="card-body">
+        <form (submit)="updateStorePhone(); $event.preventDefault()">
+          <div class="form-group mb-3">
+            <label for="storeIdPhone">Store ID</label>
+            <input
+              type="number"
+              class="form-control"
+              id="storeIdPhone"
+              placeholder="Enter store ID"
+              [(ngModel)]="storeId"
+              name="storeId"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="phoneNumber">Phone Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phoneNumber"
+              placeholder="Enter phone number"
+              [(ngModel)]="phoneNumber"
+              name="phoneNumber"
+            />
+          </div>
+          <button type="submit" class="btn btn-danger">Update Phone Number</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Assign Manager to Store -->
+    <div class="card mb-4">
+      <div class="card-header bg-warning text-dark">Assign Manager to Store</div>
+      <div class="card-body">
+        <form (submit)="assignManagerToStore(); $event.preventDefault()">
+          <div class="form-group mb-3">
+            <label for="storeIdManager">Store ID</label>
+            <input
+              type="number"
+              class="form-control"
+              id="storeIdManager"
+              placeholder="Enter store ID"
+              [(ngModel)]="storeId"
+              name="storeId"
+            />
+          </div>
+          <div class="form-group mb-3">
+            <label for="managerStaffId">Manager Staff ID</label>
+            <input
+              type="number"
+              class="form-control"
+              id="managerStaffId"
+              placeholder="Enter manager staff ID"
+              [(ngModel)]="managerStaffId"
+              name="managerStaffId"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Assign Manager</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Display All Stores -->
+    <div class="card mb-4">
+      <div class="card-header bg-success text-white">All Stores</div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Store ID</th>
+              <th>Address</th>
+              <th>Manager</th>
+              <th>Phone</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let store of stores">
+              <td>{{ store.storeId }}</td>
+              <td>{{ store.address?.address }}</td>
+              <td>{{ store.manager?.firstName }} {{ store.manager?.lastName }}</td>
+              <td>{{ store.address?.phone}}</td>
+              <td>{{ store.lastUpdate | date:'medium' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <!-- Status Message -->
+    <div *ngIf="message" class="alert alert-info mt-4">
+      {{ message }}
+    </div>
+  </div>
+  

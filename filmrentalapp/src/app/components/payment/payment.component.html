@@ -1,0 +1,66 @@
+<body>
+  
+  <div class="container">
+    <div class="row">
+      <!-- Left Column: Film Details -->
+      <div class="col-md-6 left-column">
+        <h2>Film Details</h2>
+        <p><strong>Title:</strong> {{ selectedFilm?.title || 'No Film Selected' }}</p>
+        <p><strong>ReleaseYear:</strong> {{ selectedFilm?.release_year|| 0 }}</p>
+        <p><strong>Description:</strong> {{ selectedFilm?.description || 'No description available.' }}</p>
+      </div>
+
+      <!-- Right Column: Customer Details -->
+      <div class="col-md-6 right-column">
+        <h2>Customer Details</h2>
+        <form [formGroup]="form">
+          <div class="form-group mt-3">
+            <select formControlName="customerId" (change)="onCustomerSelect($event)">
+              <option value="" disabled>Select Customer</option>
+              <option *ngFor="let customer of customers" [value]="customer.customerId">
+                {{ customer.firstName }} {{ customer.lastName }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Display customer details when a customer is selected -->
+          <div *ngIf="selectedCustomer" class="mt-3">
+            <p><strong>First Name:</strong> {{ selectedCustomer.firstName }}</p>
+            <p><strong>Last Name:</strong> {{ selectedCustomer.lastName }}</p>
+            <p><strong>Email:</strong> {{ selectedCustomer.email }}</p>
+                            <!-- Amount Input -->
+        <div class="form-group mt-3">
+         <label for="amount">Amount :</label> 
+         <br/>
+           <input 
+            id="amount" 
+    formControlName="amount" 
+    type="number" 
+    [value]="selectedFilm?.rental_rate || 0"
+    (input)="onAmountChange($event)" 
+    class="form-control" 
+    placeholder="Enter Amount" 
+  />
+</div>
+
+          </div>
+<br/>
+          <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!form.valid || !selectedCustomer">Pay Now</button>
+          </div>
+        </form>
+
+        <!-- Payment status -->
+        <div *ngIf="paymentStatus" class="mt-4">
+          <div class="alert" [class.alert-success]="paymentStatus.success" [class.alert-danger]="!paymentStatus.success">
+            {{ paymentStatus.message }}
+          </div>
+
+          <button *ngIf="paymentStatus.success" class="generate-invoice-btn mt-3" (click)="navigateToInvoice()">
+            Generate Invoice
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,142 @@
+<div class="container mt-5">
+    <!-- Navbar and Profile -->
+    <app-admin-navbar></app-admin-navbar>
+    <app-admin-profile></app-admin-profile>
+    
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Film Management</h2>
+        
+        <!-- Add Film Button -->
+        <div class="mb-4">
+            <button class="btn btn-primary" (click)="showAddFilmForm = !showAddFilmForm">
+                {{ showAddFilmForm ? 'Hide Add Film Form' : 'Add Film' }}
+            </button>
+        </div>
+        
+        <!-- Add Film Form -->
+        <div *ngIf="showAddFilmForm">
+            <form (ngSubmit)="addFilm()" class="p-4 border rounded bg-light">
+                <h4 class="mb-4">Add Film</h4>
+                
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" class="form-control" [(ngModel)]="newFilm.title" name="title" required />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" class="form-control" [(ngModel)]="newFilm.description" name="description" required></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="release_year" class="form-label">Release Year</label>
+                    <input type="number" id="release_year" class="form-control" [(ngModel)]="newFilm.release_year" name="release_year" required />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="language" class="form-label">Language</label>
+                    <select
+                      id="language"
+                      class="form-select"
+                      [(ngModel)]="newFilm.language"
+                      name="language"
+                      required>
+                      <option value="" disabled selected>Select a Language</option>
+                      <option *ngFor="let language of languages" [ngValue]="language">
+                        {{ language.name }}
+                      </option>
+                    </select>
+                  </div>
+                  
+                
+                <div class="mb-3">
+                    <label for="rental_duration" class="form-label">Rental Duration (days)</label>
+                    <input type="number" id="rental_duration" class="form-control" [(ngModel)]="newFilm.rental_duration" name="rental_duration" required />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="rental_rate" class="form-label">Rental Rate</label>
+                    <input type="number" id="rental_rate" class="form-control" [(ngModel)]="newFilm.rental_rate" name="rental_rate" required />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="length" class="form-label">Length (minutes)</label>
+                    <input type="number" id="length" class="form-control" [(ngModel)]="newFilm.length" name="length" required />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="replacement_cost" class="form-label">Replacement Cost</label>
+                    <input type="number" id="replacement_cost" class="form-control" [(ngModel)]="newFilm.replacement_cost" name="replacement_cost" required />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="number" id="rating" class="form-control" [(ngModel)]="newFilm.rating" name="rating" required />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="special_features" class="form-label">Special Features</label>
+                    <input type="text" id="special_features" class="form-control" [(ngModel)]="newFilm.special_features" name="special_features" />
+                </div>
+
+                <div>
+                    <label for="lastupdate" class="form-label">Last Update</label>
+                    <input type="datetime-local" name="lastUpdate" class="form-control" [(ngModel)]="newFilm.lastUpdate" id="lastUpdate">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Add Film</button>
+            </form>
+        </div>
+
+        <!-- Results Table -->
+        <div class="mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Film ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Release Year</th>
+                        <th>Language</th>
+                        <th>Rating</th>
+                        <th>Rental Duration</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let film of films">
+                        <td>{{ film.filmId }}</td>
+                        <td>{{ film.title }}</td>
+                        <td>{{ film.description }}</td>
+                        <td>{{ film.release_year }}</td>
+                        <td>{{ film.language.name }}</td>
+                        <td>{{ film.rental_duration }}</td>
+                        <td>{{ film.rating }}</td>
+                        <td>
+                            <select [(ngModel)]="selectedField" class="form-select">
+                                <option value="" disabled selected>Select field</option>
+                                <option value="title">Title</option>
+                                <option value="rentalDuration">Rental Duration</option>
+                                <option value="releaseYear">Release Year</option>
+                                <option value="language">Language</option>
+                                <option value="rating">Rating</option>
+                            </select>
+                            <input type="text" [(ngModel)]="updateValue" placeholder="New value" class="form-control mt-2" />
+                            <button class="btn btn-success mt-2" (click)="updateFilm(film.filmId!)">Update</button>
+                        </td>
+                        <td>
+                            <div>
+                                
+                                <button class="btn btn-danger mt-2" (click)="deleteFilm(film.filmId!)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="!films.length">
+                        <td colspan="7" class="text-center">No results found.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

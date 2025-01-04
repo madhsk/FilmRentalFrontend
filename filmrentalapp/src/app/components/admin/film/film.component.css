@@ -1,0 +1,10 @@
+.container {
+    margin-left: 130px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+app-admin-profile {
+    position: relative;
+    z-index: 10; /* Keeps the profile on top */
+}

@@ -1,0 +1,86 @@
+/* .container{
+    padding-left: 128px;
+} */
+/* General Container Styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Card styling */
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  /* Button Styling */
+  .btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    border: none;
+  }
+  
+  .btn-info {
+    background-color: #17a2b8;
+    border: none;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+  }
+  
+  /* Form Validation */
+  .text-danger {
+    font-size: 0.875rem;
+    color: #dc3545;
+  }
+  
+  input.ng-invalid.ng-touched {
+    border-color: #dc3545;
+  }
+  
+  input.ng-valid.ng-touched {
+    border-color: #28a745;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 15px;
+    }
+  
+    .card-header {
+      font-size: 1.25rem;
+    }
+  }
+  
