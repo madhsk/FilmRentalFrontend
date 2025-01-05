@@ -14,6 +14,7 @@
         <li class="menu-list-item" *ngIf="!isAuthenticated()"><a routerLink="/app-register" href="/app-register">Register</a></li>
         <li class="menu-list-item" *ngIf="isAuthenticated()"><a routerLink="/rental" href="/rental">Rental</a></li>
         <li class="menu-list-item" *ngIf="isAuthenticated()"><a routerLink="/customer-details" href="/customer-details">Customer Details</a></li>
+        <li class="menu-list-item" *ngIf="isAuthenticated()"><a routerLink="/inventory" href="/inventory">Inventory</a></li>
       </ul>
     </div>
     <div class="profile-menu" *ngIf="isAuthenticated()">

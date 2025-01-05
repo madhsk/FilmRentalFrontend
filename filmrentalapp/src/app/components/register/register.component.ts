@@ -35,7 +35,7 @@ export class RegisterComponent1 {
           this.showModal = true; // Show the modal
           setTimeout(() => {
             this.showModal = false;
-            this.router.navigate(['/staff-detail']); // Redirect to login page after modal
+            this.router.navigate(['/app-login']); // Redirect to login page after modal
           }, 1000); // Modal stays for 3 seconds before redirecting
         },
         (error) => {

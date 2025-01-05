@@ -28,7 +28,7 @@ export class CustomerService {
   
   // Create a new customer
   createCustomer(customer: Customer): Observable<any> {
-    return this.http.post(this.baseUrl+'/post', customer, {responseType:'json'});
+    return this.http.post(this.baseUrl+'/post', customer, {responseType:'text'});
   }
 
   // Update a customer's first name

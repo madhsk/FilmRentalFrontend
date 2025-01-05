@@ -1,3 +1,4 @@
+<app-navbar1></app-navbar1>
 <div class="container mt-4">
   <h2 class="text-center mb-4">Customer Management</h2>
 
@@ -13,9 +14,31 @@
       <div class="col-md-3">
         <input type="email" class="form-control" placeholder="Email" [(ngModel)]="newCustomer.email" name="email" required />
       </div>
-      <!-- <div class="col-md-3">
-        <input type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="newCustomer.phone" name="phone" required />
-      </div> -->
+      <div class="col-md-3">
+        <input type="datetime-local" class="form-control" [(ngModel)]="newCustomer.createDate" name="createDate" required />
+      </div>
+      <div class="col-md-3">
+        <input type="datetime-local" class="form-control" [(ngModel)]="newCustomer.lastUpdate" name="lastUpdate" required />
+      </div>
+      <div class="mb-3">
+        <label for="store" class="form-label">Store</label>
+        <select id="store" class="form-select" [(ngModel)]="newCustomer.store" name="store" required>
+            <option value="" disabled selected>Select a store</option>
+            <option *ngFor="let store of stores" [ngValue]="store">{{ store.storeId }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <select id="address" class="form-select" [(ngModel)]="newCustomer.address" name="address" required>
+              <option value="" disabled selected>Select an address</option>
+              <option *ngFor="let address of addresses" [ngValue]="address">{{ address.addressId }}</option>
+          </select>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" id="active" class="form-check-input" [(ngModel)]="newCustomer.active" name="active" />
+        <label for="active" class="form-check-label">Active</label>
+      </div>
       <div class="col-md-12 d-flex justify-content-end">
         <button type="submit" class="btn btn-primary">Add Customer</button>
       </div>

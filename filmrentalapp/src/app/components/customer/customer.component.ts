@@ -3,10 +3,11 @@ import { CustomerService } from '../../service/customer.service';
 import { Customer } from '../../model/Customer';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { NavbarComponent1 } from '../navbar/navbar.component';
+import { StaffService } from '../../service/staff.service';
 @Component({
   selector: 'app-customer',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,NavbarComponent1],
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.css'],
 })
@@ -18,30 +19,49 @@ export class CustomerComponent implements OnInit {
   showCreateCustomerForm: boolean = false;
   // customers: Customer[] = [];
   selectedCustomer: Customer | null = null;
+  stores: any[] = [];
+  addresses: any[] = [];
 
   newCustomer: Customer = {
     firstName: '',
     lastName: '',
     email: '',
     active: false,
-    address: {
-      phone: '',
-      city: {
-        cityName: '',
-        country: {
-          countryName: '',
-        },
-      },
-    },
+    address: undefined,
     store: undefined,
     createDate: '',
     lastUpdate: '',
   };
 
-  constructor(private customerService: CustomerService) {}
+  constructor(private customerService: CustomerService, private staffService: StaffService) {}
 
   ngOnInit(): void {
-    this.fetchActiveCustomers();
+    this.fetchActiveCustomers(); 
+    this.loadAddresses();
+    this.loadStores(); 
+  }
+
+  loadStores() {
+    this.staffService.getStores().subscribe(
+      (data) => {
+        this.stores = data;
+      },
+      (error) => {
+        console.error('Error fetching stores:', error);
+      }
+    );
+  }
+ 
+  // Load addresses from the backend
+  loadAddresses() {
+    this.staffService.getAddresses().subscribe(
+      (data) => {
+        this.addresses = data;
+      },
+      (error) => {
+        console.error('Error fetching addresses:', error);
+      }
+    );
   }
 
   fetchActiveCustomers(): void {
@@ -61,10 +81,11 @@ export class CustomerComponent implements OnInit {
     this.customerService.createCustomer(newCustomerCopy).subscribe({
       next: (data: Customer) => {
         alert('Customer created successfully!');
-        this.customers.push(data);
+        //this.customers.push(data);
         this.resetForm();
       },
       error: (err) => {
+        console.log(this.newCustomer);
         console.error('Error creating customer:', err);
         alert('Failed to create customer.');
       },
